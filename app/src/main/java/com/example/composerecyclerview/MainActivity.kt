@@ -36,11 +36,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-           DisplayTvShows {
-               Toast.makeText(this, it.name,Toast.LENGTH_LONG).show()
-           }
+            DisplayTvShows {
+                startActivity(InfoActivity.intent(this, it))
+            }
         }
     }
+
 }
 
 
