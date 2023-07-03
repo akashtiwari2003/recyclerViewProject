@@ -1,6 +1,7 @@
 package com.example.composerecyclerview
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ScrollState
@@ -13,6 +14,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +28,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LazyColumnDemo()
+            LazyColumnDemo2 {
+                Toast.makeText(this, it , Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
@@ -50,7 +54,7 @@ fun ScrollableColumnDemo() {
 
 @Composable
 fun LazyColumnDemo() {
-    LazyColumn() {
+    LazyRow() {
         items(100){
             Text(
                 text = "User Name $it",
@@ -70,7 +74,8 @@ fun LazyColumnDemo2(selectedItem : (String) -> (Unit)) {
             Text(
                 text = "User Name $it",
                 style = MaterialTheme.typography.h3,
-                modifier = Modifier.padding(10.dp)
+                modifier = Modifier
+                    .padding(10.dp)
                     .clickable { selectedItem("$it Selected") }
             )
             Divider(color = Color.Black, thickness = 5.dp)
